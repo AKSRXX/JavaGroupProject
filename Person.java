@@ -1,8 +1,3 @@
-//Auston Soetaert
-//14348256
-//Dr. M. Arowollo
-//4/12/2023
-//Team
 import java.util.*;
 public class Person 
 {
@@ -37,7 +32,7 @@ public class Person
     // other methods
     //public String toString() { /* implementation */ }
 }
-  
+/*  
 class Employee extends Person 
 {
     // constructor
@@ -82,8 +77,8 @@ class Member extends Person {
     public void setMemberId(int memberId) { this.memberId = memberId; }
 
     // other methods
-    //public void borrowItem(Item item) { /* implementation */ }
-    //public void returnItem(Item item) { /* implementation */ }
+    //public void borrowItem(Item item) {  implementation  }
+    //public void returnItem(Item item) {  implementation  }
     public List<Object> getBorrowedItems() { return borrowedItems; }
 }
 
@@ -111,5 +106,5 @@ class Professor extends Member {
     }
     public List<Student> getSupervisedStudents() { return supervisedStudents; }
 }
-   
+*/
   
