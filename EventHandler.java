@@ -2,12 +2,12 @@ import java.util.*;
 import java.text.*;
 public class EventHandler {
 
-  public static Date getDOB(Scanner scn){
+  public static Date getDob(Scanner scn){
     while(true){
       try{
-        System.out.print("Enter Member Date of Birth (DD/MM/YYYY): ");
+        System.out.print("Enter Member Date of Birth (MM/DD/YYYY): ");
         String dobString = scn.nextLine();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         Date dob = formatter.parse(dobString);
         return dob;
       }catch(Exception e){
@@ -18,9 +18,9 @@ public class EventHandler {
 
   public static String getMemTypeString(Scanner scn){
     while(true){
-      System.out.print("Enter Member Type (Professor/Member/External): ");
+      System.out.print("Enter Member Type (Professor/Student/External): ");
       String memTypeString = scn.nextLine();
-      if(memTypeString.equals("Professor") || memTypeString.equals("Member") || memTypeString.equals("External")){
+      if(memTypeString.equals("Professor") || memTypeString.equals("Student") || memTypeString.equals("External")){
         return memTypeString;
       }else{
         System.out.println("Please enter one of the acceptable options.");
@@ -29,35 +29,53 @@ public class EventHandler {
     }
   }
 
+  public static int getSsn(Scanner scn){
+    while(true){
+      System.out.print("Enter Member SSN: ");
+      try{
+        int ssn = Integer.parseInt(scn.nextLine());
+        return ssn;
+      }catch(Exception e){
+        System.out.println("Please enter an integer value.");
+      }
+    }
+  }
 
-  public static void NewMemberEvent(){
+
+  public static Member NewMemberEvent(){
     Scanner scn = new Scanner(System.in);
-    System.out.println("Enter Membership info: \n--------------------");
+    System.out.println("\nEnter Membership info: \n--------------------");
     System.out.print("Enter Member Name: ");
     String name = scn.nextLine();
     System.out.print("Enter Member Address: ");
     String address = scn.nextLine();
-    Date dob = getDOB(scn);
+    Date dob = getDob(scn);
     System.out.print("Enter Member email: ");
     String email = scn.nextLine();
-    System.out.print("Enter Member SSN: ");
-    int ssn = Integer.parseInt(scn.nextLine());
+    int ssn = getSsn(scn);
     String memtype = getMemTypeString(scn);
-    System.out.print("Creating a new member...");
-    int memberId = (int) (Math.random() * (99999 - 10000)) + 10000;
+    System.out.print("\nCreating a new member...");
+    int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
     switch(memtype){
       case "Professor":
         Professor professor = new Professor(name, address, dob, email, ssn, memberId);
-        System.out.println("The membership ID is: "+professor.getMemberId());
-
-        break;
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String formattedDate = dateFormat.format(dob);
+        System.out.println("Member Successfully Created.");
+        System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
+        scn.close();
+        return professor;
       case "Student":
         Student student = new Student(name, address, dob, email, ssn, memberId);
-        System.out.println("The membership ID is: "+student.getMemberId());
-        break;
+        DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+        String formattedDate2 = dateFormat2.format(dob);
+        System.out.println("Member Successfully Created.");
+        System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
+        scn.close();
+        return student;
       //case "External":
         //External code
     }
-    scn.close();
+    return null;
   }
 }
