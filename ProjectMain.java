@@ -101,4 +101,16 @@ class ProjectMain{
 
 
     }
+    public enum Collections {
+        BOOKS,
+        NEWSPAPERS,
+        DVDS,
+        JOURNALS
+    }
+    public enum Sections {
+        ARTS,
+        SCIENCES,
+        NEWSPAPERS,
+        LAW
+    }
 }
