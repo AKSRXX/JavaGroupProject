@@ -3,12 +3,12 @@ public class Student extends Member {
     private Professor advisor;
 
     // constructor
-    public Student(String name, String address, Date dob, String email, int ssn, int memberId, Professor advisor) {
+    public Student(String name, String address, Date dob, String email, SSN ssn, int memberId, Professor advisor) {
         super(name, address, dob, email, ssn, memberId);
         this.advisor = advisor;
     }
 
-    public Student(String name, String address, Date dob, String email, int ssn, int memberId) {
+    public Student(String name, String address, Date dob, String email, SSN ssn, int memberId) {
         super(name, address, dob, email, ssn, memberId);
     }
 
