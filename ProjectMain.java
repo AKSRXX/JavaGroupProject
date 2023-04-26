@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
+    static List<String> collections = Arrays.asList("BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS");
+    static List<String> sections = Arrays.asList("ARTS", "SCIENCES", "NEWSPAPERS", "LAW");
 
     public static void mainMenu(){
         System.out.println("University of Java Library System");
@@ -55,8 +57,21 @@ class ProjectMain{
 
 
     };
-    public static void newCollectionEvent(){};
-    public static void newRemoveMemberEvent(){};
+    public static void newCollectionEvent()
+    {
+        System.out.print("Enter a new collection to add to the list: ");
+        String newCollection = scanner.nextLine();
+        if (!collections.contains(newCollection)) {
+            collections.add(newCollection);
+            System.out.println("Collection added to the list!");
+        } else {
+            System.out.println("Collection already exists in the list.");
+        }
+    };
+    public static void newRemoveMemberEvent()
+    {
+        
+    };
     public static void newRemoveCollectionEvent(){};
     public static void newEmployeeEvent()
     {
@@ -138,18 +153,6 @@ class ProjectMain{
 
 
 
-    }
-    public enum Collections {
-        BOOKS,
-        NEWSPAPERS,
-        DVDS,
-        JOURNALS
-    }
-    public enum Sections {
-        ARTS,
-        SCIENCES,
-        NEWSPAPERS,
-        LAW
     }
     
 }
