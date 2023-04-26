@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
-    static List<String> collections = Arrays.asList("BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS");
-    static List<String> sections = Arrays.asList("ARTS", "SCIENCES", "NEWSPAPERS", "LAW");
+    static String[] sections = {"ARTS", "SCIENCES", "NEWSPAPERS", "LAW"};
+    static String[] collections = {"BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS"};
 
     public static void mainMenu(){
         System.out.println("University of Java Library System");
@@ -27,11 +27,11 @@ class ProjectMain{
     public static void newMemberEvent(){
         System.out.println("Enter Membership info: ");
         System.out.print("Enter Member Name: ");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         System.out.print("Enter Member Address: ");
-        String address = scanner.nextLine();
+        String address = scanner.next();
         System.out.print("Enter Member Date of Birth (yyyy-MM-dd): ");
-        String dobInput = scanner.nextLine();
+        String dobInput = scanner.next();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date dob = null;
         try {
@@ -42,12 +42,12 @@ class ProjectMain{
             newMemberEvent();
         }
         System.out.print("Enter Member email: ");
-        String email = scanner.nextLine();
+        String email = scanner.next();
         System.out.print("Enter Member SSN: ");
-        String memSsn = scanner.nextLine();
+        String memSsn = scanner.next();
         SSN ssn = new SSN(memSsn);
         System.out.print("Enter Membership type (Student/Professor/External): ");
-        String memtype = scanner.nextLine();
+        String memtype = scanner.next();
         System.out.print("Creating a new member...");
         Member mem = new Member(name,address,dob,email,ssn,memtype);
         //System.out.print("The membership ID is: "+mem.getID());
@@ -57,31 +57,47 @@ class ProjectMain{
 
 
     };
-    public static void newCollectionEvent()
-    {
-        System.out.print("Enter a new collection to add to the list: ");
-        String newCollection = scanner.nextLine();
-        if (!collections.contains(newCollection)) {
-            collections.add(newCollection);
-            System.out.println("Collection added to the list!");
-        } else {
-            System.out.println("Collection already exists in the list.");
+    public static void newCollectionEvent() {
+        System.out.println("Enter a new collection to add:");
+        String newCollection = scanner.next();
+        boolean alreadyExists = false;
+        for (String collection : collections) {
+            if (collection.equalsIgnoreCase(newCollection)) {
+                alreadyExists = true;
+                break;
+            }
         }
-    };
+
+        if (alreadyExists) 
+        {
+            System.out.println("Collection already exists in array.");
+        } else 
+        {
+            String[] newCollections = new String[collections.length + 1];
+            System.arraycopy(collections, 0, newCollections, 0, collections.length);
+            newCollections[collections.length] = newCollection.toUpperCase();
+            collections = newCollections;
+            System.out.println("Collection added to array.");
+            for (String collection : collections) {
+                System.out.print(collection + " ");
+            }
+            System.exit(0);
+        }
+    }
     public static void newRemoveMemberEvent()
     {
-        
+
     };
     public static void newRemoveCollectionEvent(){};
     public static void newEmployeeEvent()
     {
         System.out.println("Enter Employee info: ");
         System.out.print("Enter Employee Name: ");
-        String name = scanner.nextLine();
+        String name = scanner.next();
         System.out.print("Enter Employee Address: ");
-        String address = scanner.nextLine();
+        String address = scanner.next();
         System.out.print("Enter Employee Date of Birth (yyyy-MM-dd): ");
-        String dobInput = scanner.nextLine();
+        String dobInput = scanner.next();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date dob = null;
         try {
@@ -92,9 +108,9 @@ class ProjectMain{
             newEmployeeEvent();
         }
         System.out.print("Enter Employee email: ");
-        String email = scanner.nextLine();
+        String email = scanner.next();
         System.out.print("Enter Employee SSN: ");
-        String memSsn = scanner.nextLine();
+        String memSsn = scanner.next();
         SSN ssn = new SSN(memSsn);
         System.out.print("Creating a new member...");
         Employee emp = new Employee(name,address,dob,email,ssn);
@@ -114,7 +130,6 @@ class ProjectMain{
         System.out.print("Enter your option number: ");
         int option = scanner.nextInt();
         while(true){
-
             switch (option) {
                 case 1:
                     ProjectMain.newMemberEvent();
