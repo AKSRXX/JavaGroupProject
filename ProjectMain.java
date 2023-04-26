@@ -1,9 +1,9 @@
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 class ProjectMain{
+    static Scanner scanner = new Scanner(System.in);
 
     public static void mainMenu(){
         System.out.println("University of Java Library System");
@@ -23,33 +23,71 @@ class ProjectMain{
 
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
     public static void newMemberEvent(){
-        // Scanner scn = new Scanner(System.in);
-        // System.out.println("Enter Membership info: ");
-        // System.out.print("Enter Member Name: ");
-        // String name = scn.nextLine();
-        // System.out.print("Enter Member Address: ");
-        // String address = scn.nextLine();
-        // System.out.print("Enter Member Date of Birth: ");
-        // String dob = scn.nextLine();
-        // System.out.print("Enter Member email: ");
-        // String email = scn.nextLine();
-        // System.out.print("Enter Member SSN: ");
-        // String ssn = scn.nextLine();
-        // System.out.print("Enter Membership type (Student/Professor/External): ");
-        // String memtype = scn.nextLine();
-        // System.out.print("Creating a new member...");
-        // Member mem = new Member(name,address,dob,email,ssn,memtype);
-        // System.out.print("The membership ID is: "+mem.getID());
-        // Save the new member into the membership database
-        // mem.saveTo("membershipdatabasefile.txt");
-        // System.out.println("New Member Successfully Saved to file."); 
+        System.out.println("Enter Membership info: ");
+        System.out.print("Enter Member Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Member Address: ");
+        String address = scanner.nextLine();
+        System.out.print("Enter Member Date of Birth (yyyy-MM-dd): ");
+        String dobInput = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dob = null;
+        try {
+            dob = format.parse(dobInput);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newMemberEvent();
+        }
+        System.out.print("Enter Member email: ");
+        String email = scanner.nextLine();
+        System.out.print("Enter Member SSN: ");
+        String memSsn = scanner.nextLine();
+        SSN ssn = new SSN(memSsn);
+        System.out.print("Enter Membership type (Student/Professor/External): ");
+        String memtype = scanner.nextLine();
+        System.out.print("Creating a new member...");
+        Member mem = new Member(name,address,dob,email,ssn,memtype);
+        //System.out.print("The membership ID is: "+mem.getID());
+        //Save the new member into the membership database
+        //mem.saveTo("membershipdatabasefile.txt");
+        System.out.println("New Member Successfully Saved to file."); 
 
 
     };
     public static void newCollectionEvent(){};
     public static void newRemoveMemberEvent(){};
     public static void newRemoveCollectionEvent(){};
-    public static void newEmployeeEvent(){};
+    public static void newEmployeeEvent()
+    {
+        System.out.println("Enter Employee info: ");
+        System.out.print("Enter Employee Name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter Employee Address: ");
+        String address = scanner.nextLine();
+        System.out.print("Enter Employee Date of Birth (yyyy-MM-dd): ");
+        String dobInput = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dob = null;
+        try {
+            dob = format.parse(dobInput);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newEmployeeEvent();
+        }
+        System.out.print("Enter Employee email: ");
+        String email = scanner.nextLine();
+        System.out.print("Enter Employee SSN: ");
+        String memSsn = scanner.nextLine();
+        SSN ssn = new SSN(memSsn);
+        System.out.print("Creating a new member...");
+        Employee emp = new Employee(name,address,dob,email,ssn);
+        //System.out.print("The membership ID is: "+mem.getID());
+        //Save the new member into the membership database
+        //mem.saveTo("membershipdatabasefile.txt");
+        System.out.println("New Member Successfully Saved to file."); 
+    };
     public static void newBorrowsEvent(){};
     public static void newReturnEvent(){};
     public static void newCheckOverdues(){};
@@ -59,7 +97,6 @@ class ProjectMain{
         ProjectMain.mainMenu();
 
         System.out.print("Enter your option number: ");
-        Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
         while(true){
 
@@ -96,6 +133,7 @@ class ProjectMain{
                     continue;
             }
         }
+        
 
 
 
@@ -113,4 +151,5 @@ class ProjectMain{
         NEWSPAPERS,
         LAW
     }
+    
 }
