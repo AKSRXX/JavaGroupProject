@@ -88,7 +88,34 @@ class ProjectMain{
     {
 
     };
-    public static void newRemoveCollectionEvent(){};
+    public static void newRemoveCollectionEvent()
+    {
+        System.out.println("Enter the name of the collection to remove:");
+        String collectionToRemove = scanner.next();
+
+        boolean found = false;
+        int indexToRemove = -1;
+        for (int i = 0; i < collections.length; i++) {
+            if (collections[i].equalsIgnoreCase(collectionToRemove)) {
+                found = true;
+                indexToRemove = i;
+                break;
+            }
+        }
+
+        if (found) {
+            String[] newCollections = new String[collections.length - 1];
+            System.arraycopy(collections, 0, newCollections, 0, indexToRemove);
+            System.arraycopy(collections, indexToRemove + 1, newCollections, indexToRemove, collections.length - indexToRemove - 1);
+            collections = newCollections;
+            System.out.println("Collection removed.");
+            for (String collection : collections) {
+                System.out.print(collection + " ");
+            }
+        } else {
+            System.out.println("Collection not found.");
+        }
+    };
     public static void newEmployeeEvent()
     {
         System.out.println("Enter Employee info: ");
