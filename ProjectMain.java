@@ -1,6 +1,7 @@
 import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.io.*;
 
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
@@ -56,7 +57,7 @@ class ProjectMain{
 
 
     };
-    public static void newCollectionEvent() {
+    public static void newCollectionEvent() throws Exception {
         System.out.println("Enter a new collection to add:");
         String newCollection = scanner.next();
         boolean alreadyExists = false;
@@ -72,6 +73,16 @@ class ProjectMain{
             System.out.println("Collection already exists in array.");
         } else 
         {
+            // Open the file for writing
+            FileWriter fileWriter = new FileWriter("collections.txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Write the new collection to the file
+            bufferedWriter.write(newCollection.toUpperCase());
+            bufferedWriter.newLine();
+
+            // Close the BufferedWriter object to flush the data to the file and release resources
+            bufferedWriter.close();
             String[] newCollections = new String[collections.length + 1];
             System.arraycopy(collections, 0, newCollections, 0, collections.length);
             newCollections[collections.length] = newCollection.toUpperCase();
@@ -87,6 +98,47 @@ class ProjectMain{
     {
 
     };
+    public static void removesCollectionEvent() {
+        System.out.println("Enter the collection to remove:");
+        String collectionToRemove = scanner.next().toUpperCase();
+    
+        try {
+            // Read the contents of the file into a StringBuilder object
+            File file = new File("collections.txt");
+            Scanner fileScanner = new Scanner(file);
+            StringBuilder fileContents = new StringBuilder();
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine().toUpperCase();
+                if (!line.equals(collectionToRemove)) {
+                    fileContents.append(line).append(System.lineSeparator());
+                }
+            }
+            fileScanner.close();
+    
+            // Write the updated contents back to the file
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(fileContents.toString());
+            fileWriter.close();
+    
+            // Remove the collection from the collections array
+            String[] newCollections = new String[collections.length - 1];
+            int j = 0;
+            for (int i = 0; i < collections.length; i++) {
+                if (!collections[i].equalsIgnoreCase(collectionToRemove)) {
+                    newCollections[j] = collections[i];
+                    j++;
+                }
+            }
+            collections = newCollections;
+    
+            System.out.println("Collection removed from file and array.");
+            for (String collection : collections) {
+                System.out.print(collection + " ");
+            }
+        } catch (IOException e) {
+            System.out.println("Error removing collection: " + e.getMessage());
+        }
+    }
     public static void newRemoveCollectionEvent()
     {
         System.out.println("Enter the name of the collection to remove:");
@@ -219,14 +271,22 @@ class ProjectMain{
                     ProjectMain.newMemberEvent();
                     break;
                 case 2:
-                    ProjectMain.newCollectionEvent();
-                    break;
+                    try {
+                        ProjectMain.newCollectionEvent();
+                        break;
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
                 case 3:
                     ProjectMain.newRemoveMemberEvent();
                     break;
                 case 4:
-                    ProjectMain.newRemoveCollectionEvent();
+                try {
+                    ProjectMain.removesCollectionEvent();
                     break;
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
                 case 5:
                     ProjectMain.newEmployeeEvent();
                     break;
