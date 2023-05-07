@@ -22,7 +22,6 @@ class ProjectMain{
         System.out.println("");
     }
 
-
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
     public static void newMemberEvent(){
         System.out.println("Enter Membership info: ");
@@ -146,8 +145,64 @@ class ProjectMain{
         //mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
     };
-    public static void newBorrowsEvent(){};
-    public static void newReturnEvent(){};
+    public static void newBorrowsEvent(Member member, Item item)
+    {
+        //System.out.print("Enter member ID: ");
+        //String memberId = scanner.nextLine();
+
+        //System.out.print("Enter item ID: ");
+        //String itemId = scanner.nextLine();
+
+        System.out.print("Enter borrow date (yyyy-mm-dd): ");
+        String borrowDateString = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date borrowDate = null;
+        try {
+            borrowDate = format.parse(borrowDateString);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newBorrowsEvent(member, item);
+        }
+        //Date borrowDate = parseDate(borrowDateString);
+
+        System.out.print("Enter due date (yyyy-mm-dd): ");
+        String dueDateString = scanner.nextLine();
+        Date dueDate = null;
+        try {
+            dueDate = format.parse(dueDateString);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newBorrowsEvent(member, item);
+        }
+
+        BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);
+    };
+    public static void newReturnsEvent(Member member, Item item)
+    {
+        //System.out.print("Enter member ID: ");
+        //String memberId = scanner.nextLine();
+
+        //System.out.print("Enter item ID: ");
+        //String itemId = scanner.nextLine();
+
+        System.out.print("Enter return date (yyyy-mm-dd): ");
+        String returnDateString = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date returnDate = null;
+        try {
+            returnDate = format.parse(returnDateString);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newReturnsEvent(member, item);
+        }
+
+
+        returnsEvent returnMade = new returnsEvent(member, item, returnDate);
+    };
+    
     public static void newCheckOverdues(){};
     //You are free to implememnt other events that you see needs to be implemented
 
