@@ -145,15 +145,16 @@ class ProjectMain{
         //mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
     };
-    public static void newBorrowsEvent(Member member, Item item)
+    public static void newBorrowsEvent()
     {
+        Librarian.newBorrowsEvent(null, null);
         //System.out.print("Enter member ID: ");
         //String memberId = scanner.nextLine();
 
         //System.out.print("Enter item ID: ");
         //String itemId = scanner.nextLine();
 
-        System.out.print("Enter borrow date (yyyy-mm-dd): ");
+        /*System.out.print("Enter borrow date (yyyy-mm-dd): ");
         String borrowDateString = scanner.nextLine();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date borrowDate = null;
@@ -177,17 +178,18 @@ class ProjectMain{
             newBorrowsEvent(member, item);
         }
 
-        BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);
+        BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);*/
     };
-    public static void newReturnsEvent(Member member, Item item)
+    public static void newReturnEvent()
     {
+        Librarian.newReturnsEvent(null, null);
         //System.out.print("Enter member ID: ");
         //String memberId = scanner.nextLine();
 
         //System.out.print("Enter item ID: ");
         //String itemId = scanner.nextLine();
 
-        System.out.print("Enter return date (yyyy-mm-dd): ");
+        /*System.out.print("Enter return date (yyyy-mm-dd): ");
         String returnDateString = scanner.nextLine();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date returnDate = null;
@@ -200,7 +202,7 @@ class ProjectMain{
         }
 
 
-        returnsEvent returnMade = new returnsEvent(member, item, returnDate);
+        returnsEvent returnMade = new returnsEvent(member, item, returnDate);*/
     };
     
     public static void newCheckOverdues(){};
