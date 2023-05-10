@@ -3,7 +3,18 @@ import java.text.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.*;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 class ProjectMain{
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/your_fxml_file.fxml"));
     static Scanner scanner = new Scanner(System.in);
     static String[] sections = {"ARTS", "SCIENCES", "NEWSPAPERS", "LAW"};
     static String[] collections = {"BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS"};
