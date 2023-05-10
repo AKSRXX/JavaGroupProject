@@ -1,4 +1,5 @@
 import java.util.*;
+import java.text.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.*;
@@ -24,36 +25,47 @@ class ProjectMain{
     }
 
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
-    public static void newMemberEvent(){
-        System.out.println("Enter Membership info: ");
+    public static Member newMemberEvent(){
+        Scanner scn = new Scanner(System.in);
+        System.out.println("\nEnter Membership info: \n--------------------");
         System.out.print("Enter Member Name: ");
-        String name = scanner.next();
+        String name = scn.nextLine();
         System.out.print("Enter Member Address: ");
-        String address = scanner.next();
-        System.out.print("Enter Member Date of Birth (yyyy-MM-dd): ");
-        String dobInput = scanner.next();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date dob = null;
-        try {
-            dob = format.parse(dobInput);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newMemberEvent();
-        }
+        String address = scn.nextLine();
+        Date dob = EventHandler.getDob(scn);
         System.out.print("Enter Member email: ");
-        String email = scanner.next();
-        System.out.print("Enter Member SSN: ");
-        String memSsn = scanner.next();
-        SSN ssn = new SSN(memSsn);
-        System.out.print("Enter Membership type (Student/Professor/External): ");
-        String memtype = scanner.next();
-        System.out.print("Creating a new member...");
-        Member mem = new Member(name,address,dob,email,ssn, memberId);
-        //System.out.print("The membership ID is: "+mem.getID());
-        //Save the new member into the membership database
-        //mem.saveTo("membershipdatabasefile.txt");
+        String email = scn.nextLine();
+        SSN ssn = EventHandler.getSsn(scn);
+        String memtype = EventHandler.getMemTypeString(scn);
+        System.out.print("\nCreating a new member...");
+        int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
+        switch(memtype){
+          case "Professor":
+            Professor professor = new Professor(name, address, dob, email, ssn, memberId);
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate = dateFormat.format(dob);
+            System.out.println("Member Successfully Created.");
+            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
+            scn.close();
+            //Save the new member into the membership database
+            //mem.saveTo("membershipdatabasefile.txt");
+            return professor;
+          case "Student":
+            Student student = new Student(name, address, dob, email, ssn, memberId);
+            DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate2 = dateFormat2.format(dob);
+            System.out.println("Member Successfully Created.");
+            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
+            scn.close();
+            //Save the new member into the membership database
+            //mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
+            return student;
+            
+          //case "External":
+            //External code
+        }
+        return null;
 
 
     };
