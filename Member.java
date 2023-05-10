@@ -4,9 +4,9 @@ public class Member extends Person {
     private List<Item> borrowedItems;
 
     // constructors
-    public Member(String name, String address, Date dob, String email, SSN ssn, String memtype) {
+    public Member(String name, String address, Date dob, String email, SSN ssn, int memberId) {
         super(name, address, dob, email, ssn);
-        //this.memberId = memberId;
+        this.memberId = memberId;
         this.borrowedItems = new ArrayList<>();
     }
 

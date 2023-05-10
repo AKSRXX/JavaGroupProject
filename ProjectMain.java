@@ -49,7 +49,7 @@ class ProjectMain{
         System.out.print("Enter Membership type (Student/Professor/External): ");
         String memtype = scanner.next();
         System.out.print("Creating a new member...");
-        Member mem = new Member(name,address,dob,email,ssn,memtype);
+        Member mem = new Member(name,address,dob,email,ssn, memberId);
         //System.out.print("The membership ID is: "+mem.getID());
         //Save the new member into the membership database
         //mem.saveTo("membershipdatabasefile.txt");
