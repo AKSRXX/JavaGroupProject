@@ -9,6 +9,7 @@ public class EventHandler {
         String dobString = scn.nextLine();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         Date dob = formatter.parse(dobString);
+        System.out.print(dob);
         return dob;
       }catch(Exception e){
         System.out.println("Invalid date format.");

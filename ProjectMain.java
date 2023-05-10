@@ -3,20 +3,13 @@ import java.text.*;
 import java.text.ParseException; 
 import java.text.SimpleDateFormat;
 import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
-import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 class ProjectMain{
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/your_fxml_file.fxml"));
-    VBox root = loader.load();
-
     static Scanner scanner = new Scanner(System.in);
     static String[] sections = {"ARTS", "SCIENCES", "NEWSPAPERS", "LAW"};
     static String[] collections = {"BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS"};
@@ -50,36 +43,35 @@ class ProjectMain{
         SSN ssn = EventHandler.getSsn(scn);
         String memtype = EventHandler.getMemTypeString(scn);
         System.out.print("\nCreating a new member...");
-        int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
         switch(memtype){
           case "Professor":
             Professor professor = new Professor(name, address, dob, email, ssn);
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate = dateFormat.format(dob);
-            System.out.println("Member Successfully Created.");
-            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
-            scn.close();
-            //Save the new member into the membership database
+            System.out.println("Professor Successfully Created.");
+            System.out.println("\nNew Professor Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
             professor.saveTo("membershipdatabasefile.txt");
-
+            scn.close();
+            break;
           case "Student":
             Student student = new Student(name, address, dob, email, ssn);
             DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate2 = dateFormat2.format(dob);
-            System.out.println("Member Successfully Created.");
-            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
-            scn.close();
-            //Save the new member into the membership database
+            System.out.println("Student Successfully Created.");
+            System.out.println("\nNew Student Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
             student.saveTo("membershipdatabasefile.txt");
+            scn.close();
+            break;
         case "External":
             External external = new External(name, address, dob, email, ssn);
             DateFormat dateFormat3 = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate3 = dateFormat3.format(dob);
-            System.out.println("Member Successfully Created.");
-            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: Student\nAddress: " + external.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------");     
+            System.out.println("External Successfully Created.");
+            System.out.println("\nNew External Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: External\nAddress: " + external.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------"); 
+            external.saveTo("membershipdatabasefile.txt");    
             scn.close();
-            //Save the new member into the membership database
-            external.saveTo("membershipdatabasefile.txt");
+            break;
+
         }
 
 
@@ -120,10 +112,24 @@ class ProjectMain{
             System.exit(0);
         }
     }
-    public static void newRemoveMemberEvent()
+    public static void newRemoveMemberEvent() throws IOException  
     {
-
+        ArrayList<String> members = new ArrayList<String>();
+        members = readFileToList("membershipdatabasefile.txt");
+        System.out.println(members.toString());
     };
+
+    public static ArrayList<String> readFileToList(String fileName) throws IOException {
+        ArrayList<String> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            list.add(line);
+        }
+        reader.close();
+        return list;
+    }
+
     public static void removesCollectionEvent() {
         System.out.println("Enter the collection to remove:");
         String collectionToRemove = scanner.next().toUpperCase();
@@ -257,12 +263,13 @@ class ProjectMain{
     
     public static void newCheckOverdues(){};
     //You are free to implememnt other events that you see needs to be implemented
-
-    public static void main(String [] args){
+    // DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    // String formattedDate = dateFormat.format(dob);
+    public static void main(String [] args)throws Exception{
         ProjectMain.mainMenu();
         System.out.print("Enter your option number: ");
         int option = scanner.nextInt();
-        while(true){
+        // while(true){
             switch (option) {
                 case 1:
                 try {
@@ -309,8 +316,8 @@ class ProjectMain{
                     break;
                 default:
                     System.out.println("Invalid operator.");
-                    continue;
-            }
+            //         continue;
+            // }
         }
     }
 }
