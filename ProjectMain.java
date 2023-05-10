@@ -63,10 +63,9 @@ class ProjectMain{
             DateFormat dateFormat3 = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate3 = dateFormat3.format(dob);
             System.out.println("Member Successfully Created.");
-            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------");     
+            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: Student\nAddress: " + external.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------");     
             scn.close();
             //Save the new member into the membership database
-            System.out.println("New Member Successfully Saved to file."); 
             external.saveTo("membershipdatabasefile.txt");
         }
 
