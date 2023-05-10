@@ -203,13 +203,13 @@ class ProjectMain{
         String memSsn = scanner.next();
         SSN ssn = new SSN(memSsn);
         System.out.print("Creating a new member...");
-        Employee emp = new Employee(name,address,dob,email,ssn);
+        //Employee emp = new Employee(name,address,dob,email,ssn);
         //System.out.print("The membership ID is: "+mem.getID());
         //Save the new member into the membership database
-        //mem.saveTo("membershipdatabasefile.txt");
+        mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
     };
-    public static void newBorrowsEvent()
+    public static void newBorrowsEvent() throws Exception
     {
         Librarian.newBorrowsEvent(null, null);
         //System.out.print("Enter member ID: ");
@@ -303,8 +303,12 @@ class ProjectMain{
                     ProjectMain.newEmployeeEvent();
                     break;
                 case 6:
+                try{
                     ProjectMain.newBorrowsEvent();
                     break;
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
                 case 7:
                     ProjectMain.newReturnEvent();
                     break;
