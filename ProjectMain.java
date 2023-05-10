@@ -25,7 +25,7 @@ class ProjectMain{
     }
 
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
-    public static Member newMemberEvent(){
+    public static void newMemberEvent(){
         Scanner scn = new Scanner(System.in);
         System.out.println("\nEnter Membership info: \n--------------------");
         System.out.print("Enter Member Name: ");
@@ -48,7 +48,6 @@ class ProjectMain{
             scn.close();
             //Save the new member into the membership database
             //mem.saveTo("membershipdatabasefile.txt");
-            return professor;
           case "Student":
             Student student = new Student(name, address, dob, email, ssn);
             DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
@@ -58,13 +57,20 @@ class ProjectMain{
             scn.close();
             //Save the new member into the membership database
             //mem.saveTo("membershipdatabasefile.txt");
+        case "External":
+            External external = new External(name, address, dob, email, ssn);
+            DateFormat dateFormat3 = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate3 = dateFormat3.format(dob);
+            System.out.println("Member Successfully Created.");
+            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------");     
+            scn.close();
+            //Save the new member into the membership database
+            //mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
-            return student;
             
           //case "External":
             //External code
         }
-        return null;
 
 
     };
