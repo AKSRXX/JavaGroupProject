@@ -3,12 +3,10 @@ import java.text.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.*;
-
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
     static String[] sections = {"ARTS", "SCIENCES", "NEWSPAPERS", "LAW"};
     static String[] collections = {"BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS"};
-
     public static void mainMenu(){
         System.out.println("University of Java Library System");
         System.out.println("Menu Options");
@@ -23,9 +21,8 @@ class ProjectMain{
         System.out.println("9. Quit");
         System.out.println("");
     }
-
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
-    public static Member newMemberEvent(){
+    public static void newMemberEvent() throws Exception{
         Scanner scn = new Scanner(System.in);
         System.out.println("\nEnter Membership info: \n--------------------");
         System.out.print("Enter Member Name: ");
@@ -38,34 +35,30 @@ class ProjectMain{
         SSN ssn = EventHandler.getSsn(scn);
         String memtype = EventHandler.getMemTypeString(scn);
         System.out.print("\nCreating a new member...");
+        int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
         switch(memtype){
           case "Professor":
-            Professor professor = new Professor(name, address, dob, email, ssn);
+            Professor professor = new Professor(name, address, dob, email, ssn, memberId);
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate = dateFormat.format(dob);
             System.out.println("Member Successfully Created.");
             System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
             scn.close();
             //Save the new member into the membership database
-            //mem.saveTo("membershipdatabasefile.txt");
-            return professor;
+            Professor prof = new Professor(name, address, dob, email, ssn, memberId);
+            prof.saveTo("membershipdatabasefile.txt");
           case "Student":
-            Student student = new Student(name, address, dob, email, ssn);
+            Student student = new Student(name, address, dob, email, ssn, memberId);
             DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate2 = dateFormat2.format(dob);
             System.out.println("Member Successfully Created.");
             System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
             scn.close();
-            //Save the new member into the membership database
             //mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
-            return student;
-            
-          //case "External":
-            //External code
+            Student stud = new Student(name, address, dob, email, ssn, memberId);
+            stud.saveTo("membershipdatabasefile.txt");
         }
-        return null;
-
 
     };
     public static void newCollectionEvent() throws Exception {
@@ -78,7 +71,6 @@ class ProjectMain{
                 break;
             }
         }
-
         if (alreadyExists) 
         {
             System.out.println("Collection already exists in array.");
@@ -150,34 +142,6 @@ class ProjectMain{
             System.out.println("Error removing collection: " + e.getMessage());
         }
     }
-    public static void newRemoveCollectionEvent()
-    {
-        System.out.println("Enter the name of the collection to remove:");
-        String collectionToRemove = scanner.next();
-
-        boolean found = false;
-        int indexToRemove = -1;
-        for (int i = 0; i < collections.length; i++) {
-            if (collections[i].equalsIgnoreCase(collectionToRemove)) {
-                found = true;
-                indexToRemove = i;
-                break;
-            }
-        }
-
-        if (found) {
-            String[] newCollections = new String[collections.length - 1];
-            System.arraycopy(collections, 0, newCollections, 0, indexToRemove);
-            System.arraycopy(collections, indexToRemove + 1, newCollections, indexToRemove, collections.length - indexToRemove - 1);
-            collections = newCollections;
-            System.out.println("Collection removed.");
-            for (String collection : collections) {
-                System.out.print(collection + " ");
-            }
-        } else {
-            System.out.println("Collection not found.");
-        }
-    };
     public static void newEmployeeEvent()
     {
         System.out.println("Enter Employee info: ");
@@ -205,7 +169,7 @@ class ProjectMain{
         //Employee emp = new Employee(name,address,dob,email,ssn);
         //System.out.print("The membership ID is: "+mem.getID());
         //Save the new member into the membership database
-        mem.saveTo("membershipdatabasefile.txt");
+        //mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
     };
     public static void newBorrowsEvent() throws Exception
@@ -273,14 +237,17 @@ class ProjectMain{
 
     public static void main(String [] args){
         ProjectMain.mainMenu();
-
         System.out.print("Enter your option number: ");
         int option = scanner.nextInt();
         while(true){
             switch (option) {
                 case 1:
+                try {
                     ProjectMain.newMemberEvent();
                     break;
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
                 case 2:
                     try {
                         ProjectMain.newCollectionEvent();
@@ -322,11 +289,5 @@ class ProjectMain{
                     continue;
             }
         }
-        
-
-
-
-
     }
-    
 }
