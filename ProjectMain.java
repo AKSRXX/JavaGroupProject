@@ -2,6 +2,7 @@ import java.util.*;
 import java.text.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.io.*;
 
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
@@ -22,7 +23,6 @@ class ProjectMain{
         System.out.println("9. Quit");
         System.out.println("");
     }
-
 
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
     public static Member newMemberEvent(){
@@ -69,7 +69,7 @@ class ProjectMain{
 
 
     };
-    public static void newCollectionEvent() {
+    public static void newCollectionEvent() throws Exception {
         System.out.println("Enter a new collection to add:");
         String newCollection = scanner.next();
         boolean alreadyExists = false;
@@ -85,6 +85,16 @@ class ProjectMain{
             System.out.println("Collection already exists in array.");
         } else 
         {
+            // Open the file for writing
+            FileWriter fileWriter = new FileWriter("collections.txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            // Write the new collection to the file
+            bufferedWriter.write(newCollection.toUpperCase());
+            bufferedWriter.newLine();
+
+            // Close the BufferedWriter object to flush the data to the file and release resources
+            bufferedWriter.close();
             String[] newCollections = new String[collections.length + 1];
             System.arraycopy(collections, 0, newCollections, 0, collections.length);
             newCollections[collections.length] = newCollection.toUpperCase();
@@ -100,7 +110,75 @@ class ProjectMain{
     {
 
     };
-    public static void newRemoveCollectionEvent(){};
+    public static void removesCollectionEvent() {
+        System.out.println("Enter the collection to remove:");
+        String collectionToRemove = scanner.next().toUpperCase();
+    
+        try {
+            // Read the contents of the file into a StringBuilder object
+            File file = new File("collections.txt");
+            Scanner fileScanner = new Scanner(file);
+            StringBuilder fileContents = new StringBuilder();
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine().toUpperCase();
+                if (!line.equals(collectionToRemove)) {
+                    fileContents.append(line).append(System.lineSeparator());
+                }
+            }
+            fileScanner.close();
+    
+            // Write the updated contents back to the file
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(fileContents.toString());
+            fileWriter.close();
+    
+            // Remove the collection from the collections array
+            String[] newCollections = new String[collections.length - 1];
+            int j = 0;
+            for (int i = 0; i < collections.length; i++) {
+                if (!collections[i].equalsIgnoreCase(collectionToRemove)) {
+                    newCollections[j] = collections[i];
+                    j++;
+                }
+            }
+            collections = newCollections;
+    
+            System.out.println("Collection removed from file and array.");
+            for (String collection : collections) {
+                System.out.print(collection + " ");
+            }
+        } catch (IOException e) {
+            System.out.println("Error removing collection: " + e.getMessage());
+        }
+    }
+    public static void newRemoveCollectionEvent()
+    {
+        System.out.println("Enter the name of the collection to remove:");
+        String collectionToRemove = scanner.next();
+
+        boolean found = false;
+        int indexToRemove = -1;
+        for (int i = 0; i < collections.length; i++) {
+            if (collections[i].equalsIgnoreCase(collectionToRemove)) {
+                found = true;
+                indexToRemove = i;
+                break;
+            }
+        }
+
+        if (found) {
+            String[] newCollections = new String[collections.length - 1];
+            System.arraycopy(collections, 0, newCollections, 0, indexToRemove);
+            System.arraycopy(collections, indexToRemove + 1, newCollections, indexToRemove, collections.length - indexToRemove - 1);
+            collections = newCollections;
+            System.out.println("Collection removed.");
+            for (String collection : collections) {
+                System.out.print(collection + " ");
+            }
+        } else {
+            System.out.println("Collection not found.");
+        }
+    };
     public static void newEmployeeEvent()
     {
         System.out.println("Enter Employee info: ");
@@ -131,8 +209,66 @@ class ProjectMain{
         //mem.saveTo("membershipdatabasefile.txt");
         System.out.println("New Member Successfully Saved to file."); 
     };
-    public static void newBorrowsEvent(){};
-    public static void newReturnEvent(){};
+    public static void newBorrowsEvent()
+    {
+        Librarian.newBorrowsEvent(null, null);
+        //System.out.print("Enter member ID: ");
+        //String memberId = scanner.nextLine();
+
+        //System.out.print("Enter item ID: ");
+        //String itemId = scanner.nextLine();
+
+        /*System.out.print("Enter borrow date (yyyy-mm-dd): ");
+        String borrowDateString = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date borrowDate = null;
+        try {
+            borrowDate = format.parse(borrowDateString);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newBorrowsEvent(member, item);
+        }
+        //Date borrowDate = parseDate(borrowDateString);
+
+        System.out.print("Enter due date (yyyy-mm-dd): ");
+        String dueDateString = scanner.nextLine();
+        Date dueDate = null;
+        try {
+            dueDate = format.parse(dueDateString);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newBorrowsEvent(member, item);
+        }
+
+        BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);*/
+    };
+    public static void newReturnEvent()
+    {
+        Librarian.newReturnsEvent(null, null);
+        //System.out.print("Enter member ID: ");
+        //String memberId = scanner.nextLine();
+
+        //System.out.print("Enter item ID: ");
+        //String itemId = scanner.nextLine();
+
+        /*System.out.print("Enter return date (yyyy-mm-dd): ");
+        String returnDateString = scanner.nextLine();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date returnDate = null;
+        try {
+            returnDate = format.parse(returnDateString);
+        } catch (ParseException e) {
+            //e.printStackTrace();
+            System.out.print("Invalid Date");
+            newReturnsEvent(member, item);
+        }
+
+
+        returnsEvent returnMade = new returnsEvent(member, item, returnDate);*/
+    };
+    
     public static void newCheckOverdues(){};
     //You are free to implememnt other events that you see needs to be implemented
 
@@ -147,14 +283,22 @@ class ProjectMain{
                     ProjectMain.newMemberEvent();
                     break;
                 case 2:
-                    ProjectMain.newCollectionEvent();
-                    break;
+                    try {
+                        ProjectMain.newCollectionEvent();
+                        break;
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
                 case 3:
                     ProjectMain.newRemoveMemberEvent();
                     break;
                 case 4:
-                    ProjectMain.newRemoveCollectionEvent();
+                try {
+                    ProjectMain.removesCollectionEvent();
                     break;
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
                 case 5:
                     ProjectMain.newEmployeeEvent();
                     break;
