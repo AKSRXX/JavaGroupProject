@@ -1,6 +1,6 @@
 import java.util.*;
 import java.text.*;
-import java.text.ParseException;
+import java.text.ParseException; 
 import java.text.SimpleDateFormat;
 import java.io.*;
 
@@ -33,7 +33,9 @@ class ProjectMain{
         System.out.println("");
     }
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
+
     public static void newMemberEvent() throws Exception{
+
         Scanner scn = new Scanner(System.in);
         System.out.println("\nEnter Membership info: \n--------------------");
         System.out.print("Enter Member Name: ");
@@ -49,27 +51,35 @@ class ProjectMain{
         int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
         switch(memtype){
           case "Professor":
-            Professor professor = new Professor(name, address, dob, email, ssn, memberId);
+            Professor professor = new Professor(name, address, dob, email, ssn);
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate = dateFormat.format(dob);
             System.out.println("Member Successfully Created.");
             System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
             scn.close();
             //Save the new member into the membership database
-            Professor prof = new Professor(name, address, dob, email, ssn, memberId);
-            prof.saveTo("membershipdatabasefile.txt");
+            professor.saveTo("membershipdatabasefile.txt");
+
           case "Student":
-            Student student = new Student(name, address, dob, email, ssn, memberId);
+            Student student = new Student(name, address, dob, email, ssn);
             DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate2 = dateFormat2.format(dob);
             System.out.println("Member Successfully Created.");
             System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
             scn.close();
-            //mem.saveTo("membershipdatabasefile.txt");
-        System.out.println("New Member Successfully Saved to file."); 
-            Student stud = new Student(name, address, dob, email, ssn, memberId);
-            stud.saveTo("membershipdatabasefile.txt");
+            //Save the new member into the membership database
+            student.saveTo("membershipdatabasefile.txt");
+        case "External":
+            External external = new External(name, address, dob, email, ssn);
+            DateFormat dateFormat3 = new SimpleDateFormat("MM/dd/yyyy");
+            String formattedDate3 = dateFormat3.format(dob);
+            System.out.println("Member Successfully Created.");
+            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: Student\nAddress: " + external.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------");     
+            scn.close();
+            //Save the new member into the membership database
+            external.saveTo("membershipdatabasefile.txt");
         }
+
 
     };
     public static void newCollectionEvent() throws Exception {
