@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 class ProjectMain{
     FXMLLoader loader = new FXMLLoader(getClass().getResource("/your_fxml_file.fxml"));
+    VBox root = loader.load();
+
     static Scanner scanner = new Scanner(System.in);
     static String[] sections = {"ARTS", "SCIENCES", "NEWSPAPERS", "LAW"};
     static String[] collections = {"BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS"};

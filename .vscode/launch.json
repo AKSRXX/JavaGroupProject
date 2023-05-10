@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "GUIMain",
+            "request": "launch",
+            "mainClass": "GUIMain",
+            "projectName": "JavaGroupProject_7c5c4464"
+        },
+        {
+            "type": "java",
+            "name": "ProjectMain",
+            "request": "launch",
+            "mainClass": "ProjectMain",
+            "projectName": "JavaGroupProject_7c5c4464"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "your.package.MainClass",
+            "projectName": "your.project.name",
+            "vmArgs": "--module-path ${workspaceFolder}/SDK/src --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+  }
+  
