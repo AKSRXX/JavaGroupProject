@@ -6,7 +6,6 @@ public class Professor extends Member {
     public Professor(String name, String address, Date dob, String email, SSN ssn, int memberId) {
         super(name, address, dob, email, ssn, memberId);
         this.supervisedStudents = new ArrayList<>();
-        this.setMemberId(memberId);
     }
 
     //Functions specific to Professor

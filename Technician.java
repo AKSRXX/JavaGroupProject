@@ -1,7 +1,7 @@
 import java.util.*;
 public class Technician extends Employee {
     // constructor
-    public Technician(String name, String address, Date dob, String email, int ssn) {
+    public Technician(String name, String address, Date dob, String email, SSN ssn) {
         super(name, address, dob, email, ssn);
     }
 

@@ -29,14 +29,21 @@ public class EventHandler {
     }
   }
 
-  public static int getSsn(Scanner scn){
+  public static SSN getSsn(Scanner scn){
     while(true){
       System.out.print("Enter Member SSN: ");
       try{
-        int ssn = Integer.parseInt(scn.nextLine());
-        return ssn;
+        String ssn = scn.nextLine();
+        if(ssn.length() != 9 && !ssn.contains("-")){
+          throw new Exception();
+        }
+        if(ssn.contains("-") && ssn.length() != 11){
+          throw new Exception();
+        }
+        SSN newSSN = new SSN(ssn);
+        return newSSN;
       }catch(Exception e){
-        System.out.println("Please enter an integer value.");
+        System.out.println("Please enter an valid SSN.");
       }
     }
   }
@@ -52,7 +59,7 @@ public class EventHandler {
     Date dob = getDob(scn);
     System.out.print("Enter Member email: ");
     String email = scn.nextLine();
-    int ssn = getSsn(scn);
+    SSN ssn = getSsn(scn);
     String memtype = getMemTypeString(scn);
     System.out.print("\nCreating a new member...");
     int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
