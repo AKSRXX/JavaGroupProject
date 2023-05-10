@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 public class Member extends Person {
     private int memberId;
     private List<Item> borrowedItems;
@@ -25,6 +26,18 @@ public class Member extends Person {
                 iter.remove();
             }
        }
+    }
+    public void saveTo ( String textFile) throws Exception{
+        FileWriter fileWriter = new FileWriter(textFile, true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+        // Write the new collection to the file
+        String str = getName() + " " + getAddress() + " " + getDob() + " " + getEmail() + " " + getSsn().getFormattedSSN() + " " + getMemberId();
+        bufferedWriter.write(str);
+        bufferedWriter.newLine();
+
+        // Close the BufferedWriter object to flush the data to the file and release resources
+        bufferedWriter.close();
     }
     public List<Item> getBorrowedItems() { return borrowedItems; }
 }
