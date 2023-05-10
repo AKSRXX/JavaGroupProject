@@ -3,8 +3,8 @@ public class Professor extends Member {
     private List<Student> supervisedStudents;
 
     // constructor
-    public Professor(String name, String address, Date dob, String email, SSN ssn, int memberId) {
-        super(name, address, dob, email, ssn, memberId);
+    public Professor(String name, String address, Date dob, String email, SSN ssn) {
+        super(name, address, dob, email, ssn);
         this.supervisedStudents = new ArrayList<>();
     }
 

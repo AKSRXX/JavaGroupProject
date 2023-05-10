@@ -65,7 +65,7 @@ public class EventHandler {
     int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
     switch(memtype){
       case "Professor":
-        Professor professor = new Professor(name, address, dob, email, ssn, memberId);
+        Professor professor = new Professor(name, address, dob, email, ssn);
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         String formattedDate = dateFormat.format(dob);
         System.out.println("Member Successfully Created.");
@@ -73,7 +73,7 @@ public class EventHandler {
         scn.close();
         return professor;
       case "Student":
-        Student student = new Student(name, address, dob, email, ssn, memberId);
+        Student student = new Student(name, address, dob, email, ssn);
         DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
         String formattedDate2 = dateFormat2.format(dob);
         System.out.println("Member Successfully Created.");
