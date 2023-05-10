@@ -1,6 +1,7 @@
 import java.util.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.io.*;
 public class Librarian extends Employee 
 {
     static Scanner scanner = new Scanner(System.in);
@@ -10,7 +11,7 @@ public class Librarian extends Employee
     }
 
     // other methods specific to Librarian
-    public static void newBorrowsEvent(Member member, Item item)
+    public static void newBorrowsEvent(Member member, Item item) throws Exception
     {
         //System.out.print("Enter member ID: ");
         //String memberId = scanner.nextLine();
@@ -42,7 +43,17 @@ public class Librarian extends Employee
             newBorrowsEvent(member, item);
         }
 
-        BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);
+        //BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);
+        String savedInfo = member + " " + item + " " + borrowDate + " " + dueDate;
+        FileWriter fileWriter = new FileWriter("borrows.txt", true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+        // Write the new collection to the file
+        bufferedWriter.write(savedInfo);
+        bufferedWriter.newLine();
+
+        // Close the BufferedWriter object to flush the data to the file and release resources
+        bufferedWriter.close();
     };
     public static void newReturnsEvent(Member member, Item item)
     {
