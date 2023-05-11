@@ -8,6 +8,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
+
 
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
@@ -34,12 +37,12 @@ class ProjectMain{
         Scanner scn = new Scanner(System.in);
         System.out.println("\nEnter Membership info: \n--------------------");
         System.out.print("Enter Member Name: ");
-        String name = scn.nextLine();
+        String name = scn.next();
         System.out.print("Enter Member Address: ");
-        String address = scn.nextLine();
+        String address = scn.next();
         Date dob = EventHandler.getDob(scn);
         System.out.print("Enter Member email: ");
-        String email = scn.nextLine();
+        String email = scn.next();
         SSN ssn = EventHandler.getSsn(scn);
         String memtype = EventHandler.getMemTypeString(scn);
         System.out.print("\nCreating a new member...");
@@ -112,12 +115,39 @@ class ProjectMain{
             System.exit(0);
         }
     }
-    public static void newRemoveMemberEvent() throws IOException  
-    {
-        ArrayList<String> members = new ArrayList<String>();
-        members = readFileToList("membershipdatabasefile.txt");
-        System.out.println(members.toString());
-    };
+
+    public static void newRemoveMemberEvent() throws IOException {
+        System.out.print("Enter the SSN of the member to remove: ");
+        String ssnStr = scanner.next();
+        ArrayList<String> members = readFileToList("membershipdatabasefile.txt");
+        ArrayList<String> updatedMembers = new ArrayList<>();
+    
+        for (String item : members) {
+            String[] words = item.split(" ");
+            String name = words[0];
+            String address = words[1];
+            String email = words[8];
+            String ssn = words[9];
+            String memID = words[10];
+    
+            if (ssn.equals(ssnStr)) {
+                // Skip this item since it matches the input SSN
+                continue;
+            }
+    
+            updatedMembers.add(item);
+        }
+    
+        writeListToFile(updatedMembers, "membershipdatabasefile.txt");
+    }
+    public static void writeListToFile(ArrayList<String> list, String filename) throws IOException {
+        FileWriter writer = new FileWriter(filename);
+        for (String line : list) {
+            writer.write(line + "\n");
+        }
+        writer.close();
+    }
+
 
     public static ArrayList<String> readFileToList(String fileName) throws IOException {
         ArrayList<String> list = new ArrayList<>();
@@ -204,64 +234,42 @@ class ProjectMain{
     public static void newBorrowsEvent() throws Exception
     {
         Librarian.newBorrowsEvent(null, null);
-        //System.out.print("Enter member ID: ");
-        //String memberId = scanner.nextLine();
-
-        //System.out.print("Enter item ID: ");
-        //String itemId = scanner.nextLine();
-
-        /*System.out.print("Enter borrow date (yyyy-mm-dd): ");
-        String borrowDateString = scanner.nextLine();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date borrowDate = null;
-        try {
-            borrowDate = format.parse(borrowDateString);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newBorrowsEvent(member, item);
-        }
-        //Date borrowDate = parseDate(borrowDateString);
-
-        System.out.print("Enter due date (yyyy-mm-dd): ");
-        String dueDateString = scanner.nextLine();
-        Date dueDate = null;
-        try {
-            dueDate = format.parse(dueDateString);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newBorrowsEvent(member, item);
-        }
-
-        BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);*/
     };
     public static void newReturnEvent()
     {
         Librarian.newReturnsEvent(null, null);
-        //System.out.print("Enter member ID: ");
-        //String memberId = scanner.nextLine();
-
-        //System.out.print("Enter item ID: ");
-        //String itemId = scanner.nextLine();
-
-        /*System.out.print("Enter return date (yyyy-mm-dd): ");
-        String returnDateString = scanner.nextLine();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date returnDate = null;
-        try {
-            returnDate = format.parse(returnDateString);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newReturnsEvent(member, item);
-        }
-
-
-        returnsEvent returnMade = new returnsEvent(member, item, returnDate);*/
     };
     
-    public static void newCheckOverdues(){};
+    public static void newCheckOverdues() throws Exception{
+        System.out.print("Enter the Members Id to check overdues: ");
+        String mStr = scanner.next();
+        String dobInput = "2023-05-12";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dob = null;
+        dob = format.parse(dobInput);
+        
+        ArrayList<String> check = readFileToList("borrows.txt");
+        ArrayList<String> updatedCheck = new ArrayList<>();
+    
+        for (String item : check) {
+            String[] words = item.split(" ");
+            String member = words[0];
+            //String itemChecked = words[1];
+            //String borrowDate = words[3];
+            String dueDate = words[4];
+    
+            if (member.equals(mStr) && (dob.compareTo(dueDate) < 0)) {
+                continue;
+            }
+    
+            updatedCheck.add(item);
+        }
+        
+        for (String item : updatedCheck){
+            System.out.print(item);
+        }
+        //writeListToFile(updatedCheck, "membershipdatabasefile.txt");
+    };
     //You are free to implememnt other events that you see needs to be implemented
     // DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     // String formattedDate = dateFormat.format(dob);
