@@ -11,13 +11,53 @@ public class Librarian extends Employee
     }
 
     // other methods specific to Librarian
-    public static void newBorrowsEvent(Member member, Item item) throws Exception
-    {
-        //System.out.print("Enter member ID: ");
-        //String memberId = scanner.nextLine();
 
-        //System.out.print("Enter item ID: ");
-        //String itemId = scanner.nextLine();
+    public static void newCheckOverdues() throws Exception{
+        System.out.print("Enter the Members Id to check overdues: ");
+        String mStr = scanner.next();
+        String dobInput = "2023-05-11";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = null;
+        currentDate = format.parse(dobInput);
+        
+        ArrayList<String> check = ProjectMain.readFileToList("borrows.txt");
+        ArrayList<String> updatedCheck = new ArrayList<>();
+    
+        for (String item : check) {
+            String[] words = item.split(", ");
+            String member = words[0];
+            //String itemChecked = words[1];
+            //String borrowDate = words[3];
+            String dueDate = words[3];
+
+            Date dueDate2 = format.parse(dueDate);
+
+
+    
+            if (member.equals(mStr) == false || currentDate.before(dueDate2) == true){
+                continue;
+            }
+    
+            updatedCheck.add(item);
+
+        }
+        for (String item : updatedCheck){
+            System.out.println(item);
+
+        }
+        //writeListToFile(updatedCheck, "membershipdatabasefile.txt");
+    
+};
+
+
+
+    public static void newBorrowsEvent() throws Exception
+    {
+        System.out.print("Enter member ID: ");
+        String memberId = scanner.nextLine();
+
+        System.out.print("Enter item ID: ");
+        String itemId = scanner.nextLine();
 
         System.out.print("Enter borrow date (yyyy-mm-dd): ");
         String borrowDateString = scanner.nextLine();
@@ -28,7 +68,7 @@ public class Librarian extends Employee
         } catch (ParseException e) {
             //e.printStackTrace();
             System.out.print("Invalid Date");
-            newBorrowsEvent(member, item);
+            newBorrowsEvent();
         }
         //Date borrowDate = parseDate(borrowDateString);
 
@@ -40,11 +80,11 @@ public class Librarian extends Employee
         } catch (ParseException e) {
             //e.printStackTrace();
             System.out.print("Invalid Date");
-            newBorrowsEvent(member, item);
+            newBorrowsEvent();
         }
-
+        
         //BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);
-        String savedInfo = member + " " + item + " " + borrowDate + " " + dueDate;
+        String savedInfo = memberId + ", " + itemId + ", " + borrowDateString + ", " + dueDateString;
         FileWriter fileWriter = new FileWriter("borrows.txt", true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
@@ -76,6 +116,6 @@ public class Librarian extends Employee
         }
 
 
-        returnsEvent returnMade = new returnsEvent(member, item, returnDate);
+        //returnsEvent returnMade = new returnsEvent(member, item, returnDate);
     };
 }

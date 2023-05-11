@@ -123,12 +123,12 @@ class ProjectMain{
         ArrayList<String> updatedMembers = new ArrayList<>();
     
         for (String item : members) {
-            String[] words = item.split(" ");
+            String[] words = item.split(", ");
             String name = words[0];
             String address = words[1];
-            String email = words[8];
-            String ssn = words[9];
-            String memID = words[10];
+            String email = words[3];
+            String ssn = words[4];
+            String memID = words[5];
     
             if (ssn.equals(ssnStr)) {
                 // Skip this item since it matches the input SSN
@@ -201,75 +201,35 @@ class ProjectMain{
             System.out.println("Error removing collection: " + e.getMessage());
         }
     }
-    public static void newEmployeeEvent()
+    public static void newEmployeeEvent() throws Exception
     {
-        System.out.println("Enter Employee info: ");
+        Scanner scn = new Scanner(System.in);
+        System.out.println("\nEnter Employee info: \n--------------------");
         System.out.print("Enter Employee Name: ");
-        String name = scanner.next();
+        String name = scn.next();
         System.out.print("Enter Employee Address: ");
-        String address = scanner.next();
-        System.out.print("Enter Employee Date of Birth (yyyy-MM-dd): ");
-        String dobInput = scanner.next();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date dob = null;
-        try {
-            dob = format.parse(dobInput);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newEmployeeEvent();
-        }
+        String address = scn.next();
+        Date dob = EventHandler.getDob(scn);
         System.out.print("Enter Employee email: ");
-        String email = scanner.next();
-        System.out.print("Enter Employee SSN: ");
-        String memSsn = scanner.next();
-        SSN ssn = new SSN(memSsn);
-        System.out.print("Creating a new member...");
-        //Employee emp = new Employee(name,address,dob,email,ssn);
-        //System.out.print("The membership ID is: "+mem.getID());
-        //Save the new member into the membership database
-        //mem.saveTo("membershipdatabasefile.txt");
-        System.out.println("New Member Successfully Saved to file."); 
+        String email = scn.next();
+        SSN ssn = EventHandler.getSsn(scn);
+        Employee emp = new Employee(name, address, dob, email, ssn);
+        System.out.println("\nCreating new employee...");
+        emp.saveTo("employeedatabasefile.txt");
+        System.out.println("\nEmployee added to database.\n");
     };
     public static void newBorrowsEvent() throws Exception
     {
-        Librarian.newBorrowsEvent(null, null);
+        Librarian.newBorrowsEvent();
     };
     public static void newReturnEvent()
     {
         Librarian.newReturnsEvent(null, null);
     };
-    
+
     public static void newCheckOverdues() throws Exception{
-        System.out.print("Enter the Members Id to check overdues: ");
-        String mStr = scanner.next();
-        String dobInput = "2023-05-12";
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date dob = null;
-        dob = format.parse(dobInput);
-        
-        ArrayList<String> check = readFileToList("borrows.txt");
-        ArrayList<String> updatedCheck = new ArrayList<>();
-    
-        for (String item : check) {
-            String[] words = item.split(" ");
-            String member = words[0];
-            //String itemChecked = words[1];
-            //String borrowDate = words[3];
-            String dueDate = words[4];
-    
-            if (member.equals(mStr) && (dob.compareTo(dueDate) < 0)) {
-                continue;
-            }
-    
-            updatedCheck.add(item);
-        }
-        
-        for (String item : updatedCheck){
-            System.out.print(item);
-        }
-        //writeListToFile(updatedCheck, "membershipdatabasefile.txt");
-    };
+        Librarian.newCheckOverdues();
+    }
     //You are free to implememnt other events that you see needs to be implemented
     // DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     // String formattedDate = dateFormat.format(dob);
