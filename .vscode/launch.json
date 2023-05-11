@@ -3,6 +3,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ProjectMain",
+            "request": "launch",
+            "mainClass": "ProjectMain",
+            "projectName": "JavaGroupProject_6c217983"
+        },
+        {
+            "type": "java",
             "name": "GUIMain",
             "request": "launch",
             "mainClass": "GUIMain",

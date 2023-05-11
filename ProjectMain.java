@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;    
+
 
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
@@ -113,6 +115,7 @@ class ProjectMain{
             System.exit(0);
         }
     }
+
     public static void newRemoveMemberEvent() throws IOException {
         System.out.print("Enter the SSN of the member to remove: ");
         String ssnStr = scanner.next();
@@ -144,6 +147,7 @@ class ProjectMain{
         }
         writer.close();
     }
+
 
     public static ArrayList<String> readFileToList(String fileName) throws IOException {
         ArrayList<String> list = new ArrayList<>();
