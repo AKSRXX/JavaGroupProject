@@ -33,6 +33,8 @@ public class EventHandler {
     }
   }
 
+
+
   public static SSN getSsn(Scanner scn){
     while(true){
       System.out.print("Enter Member SSN: ");
