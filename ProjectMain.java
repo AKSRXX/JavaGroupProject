@@ -1,15 +1,11 @@
 import java.util.*;
 import java.text.*;
-import java.text.ParseException; 
 import java.text.SimpleDateFormat;
 import java.io.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import java.time.format.DateTimeFormatter;  
-import java.time.LocalDateTime;    
 
 
 class ProjectMain{
@@ -32,20 +28,8 @@ class ProjectMain{
     }
     //You can either implement your events in these functions, or you can write an Event class and call a static function here.
 
-    public static void newMemberEvent() throws Exception{
-
-        Scanner scn = new Scanner(System.in);
-        System.out.println("\nEnter Membership info: \n--------------------");
-        System.out.print("Enter Member Name: ");
-        String name = scn.next();
-        System.out.print("Enter Member Address: ");
-        String address = scn.next();
-        Date dob = EventHandler.getDob(scn);
-        System.out.print("Enter Member email: ");
-        String email = scn.next();
-        SSN ssn = EventHandler.getSsn(scn);
-        String memtype = EventHandler.getMemTypeString(scn);
-        System.out.print("\nCreating a new member...");
+    public static void newMemberEvent(String name, String address, Date dob, String email, String stringSSN, String memtype) throws Exception{
+        SSN ssn = new SSN(stringSSN);
         switch(memtype){
           case "Professor":
             Professor professor = new Professor(name, address, dob, email, ssn);
@@ -54,7 +38,6 @@ class ProjectMain{
             System.out.println("Professor Successfully Created.");
             System.out.println("\nNew Professor Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
             professor.saveTo("membershipdatabasefile.txt");
-            scn.close();
             break;
           case "Student":
             Student student = new Student(name, address, dob, email, ssn);
@@ -63,7 +46,6 @@ class ProjectMain{
             System.out.println("Student Successfully Created.");
             System.out.println("\nNew Student Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
             student.saveTo("membershipdatabasefile.txt");
-            scn.close();
             break;
         case "External":
             External external = new External(name, address, dob, email, ssn);
@@ -71,17 +53,14 @@ class ProjectMain{
             String formattedDate3 = dateFormat3.format(dob);
             System.out.println("External Successfully Created.");
             System.out.println("\nNew External Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: External\nAddress: " + external.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------"); 
-            external.saveTo("membershipdatabasefile.txt");    
-            scn.close();
+            external.saveTo("membershipdatabasefile.txt");
             break;
 
         }
 
 
     };
-    public static void newCollectionEvent() throws Exception {
-        System.out.println("Enter a new collection to add:");
-        String newCollection = scanner.next();
+    public static void newCollectionEvent(String newCollection) throws Exception {
         boolean alreadyExists = false;
         for (String collection : collections) {
             if (collection.equalsIgnoreCase(newCollection)) {
@@ -116,9 +95,7 @@ class ProjectMain{
         }
     }
 
-    public static void newRemoveMemberEvent() throws IOException {
-        System.out.print("Enter the SSN of the member to remove: ");
-        String ssnStr = scanner.next();
+    public static void newRemoveMemberEvent(String ssnStr) throws IOException {
         ArrayList<String> members = readFileToList("membershipdatabasefile.txt");
         ArrayList<String> updatedMembers = new ArrayList<>();
     
@@ -160,10 +137,7 @@ class ProjectMain{
         return list;
     }
 
-    public static void removesCollectionEvent() {
-        System.out.println("Enter the collection to remove:");
-        String collectionToRemove = scanner.next().toUpperCase();
-    
+    public static void removesCollectionEvent(String collectionToRemove) {
         try {
             // Read the contents of the file into a StringBuilder object
             File file = new File("collections.txt");
@@ -201,18 +175,10 @@ class ProjectMain{
             System.out.println("Error removing collection: " + e.getMessage());
         }
     }
-    public static void newEmployeeEvent() throws Exception
-    {
-        Scanner scn = new Scanner(System.in);
-        System.out.println("\nEnter Employee info: \n--------------------");
-        System.out.print("Enter Employee Name: ");
-        String name = scn.next();
-        System.out.print("Enter Employee Address: ");
-        String address = scn.next();
-        Date dob = EventHandler.getDob(scn);
-        System.out.print("Enter Employee email: ");
-        String email = scn.next();
-        SSN ssn = EventHandler.getSsn(scn);
+    public static void newEmployeeEvent(String name, String address, String dobString, String email, String stringSSN) throws Exception{
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Date dob = formatter.parse(dobString);
+        SSN ssn = new SSN(stringSSN);
         Employee emp = new Employee(name, address, dob, email, ssn);
         System.out.println("\nCreating new employee...");
         emp.saveTo("employeedatabasefile.txt");
@@ -234,58 +200,58 @@ class ProjectMain{
     // DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
     // String formattedDate = dateFormat.format(dob);
     public static void main(String [] args)throws Exception{
-        ProjectMain.mainMenu();
-        System.out.print("Enter your option number: ");
-        int option = scanner.nextInt();
-        // while(true){
-            switch (option) {
-                case 1:
-                try {
-                    ProjectMain.newMemberEvent();
-                    break;
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
-                case 2:
-                    try {
-                        ProjectMain.newCollectionEvent();
-                        break;
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-                case 3:
-                    ProjectMain.newRemoveMemberEvent();
-                    break;
-                case 4:
-                try {
-                    ProjectMain.removesCollectionEvent();
-                    break;
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
-                case 5:
-                    ProjectMain.newEmployeeEvent();
-                    break;
-                case 6:
-                try{
-                    ProjectMain.newBorrowsEvent();
-                    break;
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
-                case 7:
-                    ProjectMain.newReturnEvent();
-                    break;
-                case 8:
-                    ProjectMain.newCheckOverdues();
-                    break;
-                case 9:
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Invalid operator.");
-            //         continue;
-            // }
-        }
+        // ProjectMain.mainMenu();
+        // System.out.print("Enter your option number: ");
+        // int option = scanner.nextInt();
+        // // while(true){
+        //     switch (option) {
+        //         case 1:
+        //         try {
+        //             ProjectMain.newMemberEvent();
+        //             break;
+        //         } catch (Exception e) {
+        //             // TODO: handle exception
+        //         }
+        //         case 2:
+        //             try {
+        //                 ProjectMain.newCollectionEvent();
+        //                 break;
+        //             } catch (Exception e) {
+        //                 // TODO: handle exception
+        //             }
+        //         case 3:
+        //             ProjectMain.newRemoveMemberEvent();
+        //             break;
+        //         case 4:
+        //         try {
+        //             ProjectMain.removesCollectionEvent();
+        //             break;
+        //         } catch (Exception e) {
+        //             // TODO: handle exception
+        //         }
+        //         case 5:
+        //             ProjectMain.newEmployeeEvent();
+        //             break;
+        //         case 6:
+        //         try{
+        //             ProjectMain.newBorrowsEvent();
+        //             break;
+        //         } catch (Exception e) {
+        //             // TODO: handle exception
+        //         }
+        //         case 7:
+        //             ProjectMain.newReturnEvent();
+        //             break;
+        //         case 8:
+        //             ProjectMain.newCheckOverdues();
+        //             break;
+        //         case 9:
+        //             System.exit(0);
+        //             break;
+        //         default:
+        //             System.out.println("Invalid operator.");
+        //     //         continue;
+        //     // }
+        // }
     }
 }
