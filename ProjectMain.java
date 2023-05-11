@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
     static String[] sections = {"ARTS", "SCIENCES", "NEWSPAPERS", "LAW"};
-    static String[] collections = {"BOOKS", "NEWSPAPERS", "DVDS", "JOURNALS"};
+    static String[] collections = {};
     public static void mainMenu(){
         System.out.println("University of Java Library System");
         System.out.println("Menu Options");
