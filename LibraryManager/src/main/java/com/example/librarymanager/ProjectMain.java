@@ -5,15 +5,14 @@ import java.text.*;
 import java.text.ParseException; 
 import java.text.SimpleDateFormat;
 import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
-import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
+
 
 class ProjectMain{
     static Scanner scanner = new Scanner(System.in);
@@ -40,45 +39,44 @@ class ProjectMain{
         Scanner scn = new Scanner(System.in);
         System.out.println("\nEnter Membership info: \n--------------------");
         System.out.print("Enter Member Name: ");
-        String name = scn.nextLine();
+        String name = scn.next();
         System.out.print("Enter Member Address: ");
-        String address = scn.nextLine();
+        String address = scn.next();
         Date dob = EventHandler.getDob(scn);
         System.out.print("Enter Member email: ");
-        String email = scn.nextLine();
+        String email = scn.next();
         SSN ssn = EventHandler.getSsn(scn);
         String memtype = EventHandler.getMemTypeString(scn);
         System.out.print("\nCreating a new member...");
-        int memberId = (int) (Math.random() * (999999 - 100000)) + 100000;
         switch(memtype){
           case "Professor":
             Professor professor = new Professor(name, address, dob, email, ssn);
             DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate = dateFormat.format(dob);
-            System.out.println("Member Successfully Created.");
-            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
-            scn.close();
-            //Save the new member into the membership database
+            System.out.println("Professor Successfully Created.");
+            System.out.println("\nNew Professor Information: \n-----------------------\nMember ID: " + professor.getMemberId() + "\nName: "+ professor.getName() + "\nMember Type: Professor\nAddress: " + professor.getAddress() + "\nDate of Birth: " + formattedDate + "\nEmail: " + professor.getEmail() + "\n-----------------------");
             professor.saveTo("membershipdatabasefile.txt");
-
+            scn.close();
+            break;
           case "Student":
             Student student = new Student(name, address, dob, email, ssn);
             DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate2 = dateFormat2.format(dob);
-            System.out.println("Member Successfully Created.");
-            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
-            scn.close();
-            //Save the new member into the membership database
+            System.out.println("Student Successfully Created.");
+            System.out.println("\nNew Student Information: \n-----------------------\nMember ID: " + student.getMemberId() + "\nName: "+ student.getName() + "\nMember Type: Student\nAddress: " + student.getAddress() + "\nDate of Birth: " + formattedDate2 + "\nEmail: " + student.getEmail() + "\n-----------------------");     
             student.saveTo("membershipdatabasefile.txt");
+            scn.close();
+            break;
         case "External":
             External external = new External(name, address, dob, email, ssn);
             DateFormat dateFormat3 = new SimpleDateFormat("MM/dd/yyyy");
             String formattedDate3 = dateFormat3.format(dob);
-            System.out.println("Member Successfully Created.");
-            System.out.println("\nNew Member Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: Student\nAddress: " + external.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------");     
+            System.out.println("External Successfully Created.");
+            System.out.println("\nNew External Information: \n-----------------------\nMember ID: " + external.getMemberId() + "\nName: "+ external.getName() + "\nMember Type: External\nAddress: " + external.getAddress() + "\nDate of Birth: " + formattedDate3 + "\nEmail: " + external.getEmail() + "\n-----------------------"); 
+            external.saveTo("membershipdatabasefile.txt");    
             scn.close();
-            //Save the new member into the membership database
-            external.saveTo("membershipdatabasefile.txt");
+            break;
+
         }
 
 
@@ -119,10 +117,51 @@ class ProjectMain{
             System.exit(0);
         }
     }
-    public static void newRemoveMemberEvent()
-    {
 
-    };
+    public static void newRemoveMemberEvent() throws IOException {
+        System.out.print("Enter the SSN of the member to remove: ");
+        String ssnStr = scanner.next();
+        ArrayList<String> members = readFileToList("membershipdatabasefile.txt");
+        ArrayList<String> updatedMembers = new ArrayList<>();
+    
+        for (String item : members) {
+            String[] words = item.split(" ");
+            String name = words[0];
+            String address = words[1];
+            String email = words[8];
+            String ssn = words[9];
+            String memID = words[10];
+    
+            if (ssn.equals(ssnStr)) {
+                // Skip this item since it matches the input SSN
+                continue;
+            }
+    
+            updatedMembers.add(item);
+        }
+    
+        writeListToFile(updatedMembers, "membershipdatabasefile.txt");
+    }
+    public static void writeListToFile(ArrayList<String> list, String filename) throws IOException {
+        FileWriter writer = new FileWriter(filename);
+        for (String line : list) {
+            writer.write(line + "\n");
+        }
+        writer.close();
+    }
+
+
+    public static ArrayList<String> readFileToList(String fileName) throws IOException {
+        ArrayList<String> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            list.add(line);
+        }
+        reader.close();
+        return list;
+    }
+
     public static void removesCollectionEvent() {
         System.out.println("Enter the collection to remove:");
         String collectionToRemove = scanner.next().toUpperCase();
@@ -197,71 +236,50 @@ class ProjectMain{
     public static void newBorrowsEvent() throws Exception
     {
         Librarian.newBorrowsEvent(null, null);
-        //System.out.print("Enter member ID: ");
-        //String memberId = scanner.nextLine();
-
-        //System.out.print("Enter item ID: ");
-        //String itemId = scanner.nextLine();
-
-        /*System.out.print("Enter borrow date (yyyy-mm-dd): ");
-        String borrowDateString = scanner.nextLine();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date borrowDate = null;
-        try {
-            borrowDate = format.parse(borrowDateString);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newBorrowsEvent(member, item);
-        }
-        //Date borrowDate = parseDate(borrowDateString);
-
-        System.out.print("Enter due date (yyyy-mm-dd): ");
-        String dueDateString = scanner.nextLine();
-        Date dueDate = null;
-        try {
-            dueDate = format.parse(dueDateString);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newBorrowsEvent(member, item);
-        }
-
-        BorrowEvent eventMade = new BorrowEvent(member, item, borrowDate, dueDate);*/
     };
     public static void newReturnEvent()
     {
         Librarian.newReturnsEvent(null, null);
-        //System.out.print("Enter member ID: ");
-        //String memberId = scanner.nextLine();
-
-        //System.out.print("Enter item ID: ");
-        //String itemId = scanner.nextLine();
-
-        /*System.out.print("Enter return date (yyyy-mm-dd): ");
-        String returnDateString = scanner.nextLine();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date returnDate = null;
-        try {
-            returnDate = format.parse(returnDateString);
-        } catch (ParseException e) {
-            //e.printStackTrace();
-            System.out.print("Invalid Date");
-            newReturnsEvent(member, item);
-        }
-
-
-        returnsEvent returnMade = new returnsEvent(member, item, returnDate);*/
     };
     
-    public static void newCheckOverdues(){};
+    public static void newCheckOverdues() throws Exception{
+        System.out.print("Enter the Members Id to check overdues: ");
+        String mStr = scanner.next();
+        String dobInput = "2023-05-12";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dob = null;
+        dob = format.parse(dobInput);
+        
+        ArrayList<String> check = readFileToList("borrows.txt");
+        ArrayList<String> updatedCheck = new ArrayList<>();
+    
+        for (String item : check) {
+            String[] words = item.split(" ");
+            String member = words[0];
+            //String itemChecked = words[1];
+            //String borrowDate = words[3];
+            String dueDate = words[4];
+    
+            if (member.equals(mStr) && (dob.compareTo(dueDate) < 0)) {
+                continue;
+            }
+    
+            updatedCheck.add(item);
+        }
+        
+        for (String item : updatedCheck){
+            System.out.print(item);
+        }
+        //writeListToFile(updatedCheck, "membershipdatabasefile.txt");
+    };
     //You are free to implememnt other events that you see needs to be implemented
-
-    public static void main(String [] args){
+    // DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+    // String formattedDate = dateFormat.format(dob);
+    public static void main(String [] args)throws Exception{
         ProjectMain.mainMenu();
         System.out.print("Enter your option number: ");
         int option = scanner.nextInt();
-        while(true){
+        // while(true){
             switch (option) {
                 case 1:
                 try {
@@ -308,8 +326,8 @@ class ProjectMain{
                     break;
                 default:
                     System.out.println("Invalid operator.");
-                    continue;
-            }
+            //         continue;
+            // }
         }
     }
 }
