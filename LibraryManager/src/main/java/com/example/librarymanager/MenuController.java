@@ -1,5 +1,6 @@
 package com.example.librarymanager;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,47 +56,83 @@ public class MenuController {
     }
 
     @FXML
-    void handleNewCollectionClick(ActionEvent event) {
-        System.out.println("New Collection button clicked!");
+    void handleNewCollectionClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("AddCollection.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML
-    void handleRemoveMembershipClick(ActionEvent event) {
-        System.out.println("Remove Membership button clicked!");
+    void handleRemoveMembershipClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("RemoveMember.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML
-    void handleNewEmployeeClick(ActionEvent event) {
-        System.out.println("New Employee button clicked!");
+    void handleNewEmployeeClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("AddNewEmployee.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML
-    void handleBorrowItemClick(ActionEvent event) {
-        System.out.println("Borrow Item button clicked!");
+    void handleBorrowItemClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("CheckoutItem.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML
-    void handleReturnItemClick(ActionEvent event) {
-        System.out.println("Return Item button clicked!");
+    void handleReturnItemClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("ReturnItem.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML
-    void handleCheckOverduesClick(ActionEvent event) {
-        System.out.println("Check Overdues button clicked!");
+    void handleCheckOverduesClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("OverdueItems.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML
-    void handleEditInformationClick(ActionEvent event) {
-        System.out.println("Edit Information button clicked!");
+    void handleEditInformationClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("EditInformations.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML
     void handleRemoveItemClick(ActionEvent event) {
-        System.out.println("Remove Item From Collection button clicked!");
+
+        System.out.println("TBD");
     }
 
     @FXML
     void handleQuitClick(ActionEvent event) {
-        System.out.println("Quit button clicked!");
+        Platform.exit();
     }
 }
