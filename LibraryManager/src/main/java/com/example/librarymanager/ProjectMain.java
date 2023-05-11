@@ -260,10 +260,10 @@ class ProjectMain{
             //String borrowDate = words[3];
             String dueDate = words[4];
     
-            if (member.equals(mStr) && (dob.compareTo(dueDate) < 0)) {
-                continue;
-            }
-    
+//            if (member.equals(mStr) && (dob.compareTo(dueDate) < 0)) {
+//                continue;
+//            }
+//
             updatedCheck.add(item);
         }
         

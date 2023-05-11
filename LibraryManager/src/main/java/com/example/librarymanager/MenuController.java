@@ -127,7 +127,6 @@ public class MenuController {
 
     @FXML
     void handleRemoveItemClick(ActionEvent event) {
-
         System.out.println("TBD");
     }
 
