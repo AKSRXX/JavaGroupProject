@@ -43,15 +43,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox prefHeight="400.0" fx:controller="com.example.librarymanager.MemberController" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <HBox alignment="TOP_CENTER" layoutX="220.0" layoutY="336.0" prefHeight="50.0" prefWidth="200.0" spacing="7.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
+                  <Button mnemonicParsing="false" text="Save" onAction="#getValues" />
                   <Button mnemonicParsing="false" text="Reset" />
-                  <Button mnemonicParsing="false" text="Exit" />
+                  <Button mnemonicParsing="false" text="Exit" onAction="#handleHome"/>
                </children>
                <padding>
                   <Insets top="10.0" />
@@ -62,37 +65,45 @@
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="67.0" text="Name" />
-                        <TextField promptText="First and Last" />
+                        <TextField fx:id="nameField" promptText="First and Last" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="67.0" text="Address" />
-                        <TextField promptText="Address" />
+                        <TextField fx:id = "addressField" promptText="Address" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="67.0" text="Email" />
-                        <TextField promptText="Email" />
+                        <TextField fx:id = "emailField" promptText="Email" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="67.0" text="SSN" />
-                        <TextField promptText="SSN" />
+                        <TextField fx:id = "SSNField" promptText="SSN" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="67.0" text="DOB" />
-                        <DatePicker />
+                        <DatePicker fx:id = "dateField" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="67.0" text="Type" />
-                        <ChoiceBox prefWidth="150.0" />
+                        <ChoiceBox prefWidth="150.0">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="External" />
+                                 <String fx:value="Professor" />
+                                 <String fx:value="Student" />
+                              </FXCollections>
+                           </items>
+                        </ChoiceBox>
                      </children>
                   </HBox>
                </children>

@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
         System.out.println("Starting app...");
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("MainMenu2.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("ObjectOrientedFinalProject");
         stage.setScene(scene);
         stage.show();
     }
