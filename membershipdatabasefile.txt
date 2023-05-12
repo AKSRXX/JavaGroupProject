@@ -1,2 +1,0 @@
-Auston, AustonAddress, Wed Nov 21 00:00:00 CST 2001, auston@auston.com, 193-84-7563, 7563
-Jacob, JacobAddress, Mon Mar 12 00:00:00 CST 2001, jacob@jacob.com, 987-65-4321, 4321

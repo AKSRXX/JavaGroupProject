@@ -1,4 +1,4 @@
-package com.example.librarymanager;
+package com.it3330.librarymanager;
 
 public class Item {
   private int itemId;

@@ -1,4 +1,4 @@
-package com.example.librarymanager;
+package com.it3330.librarymanager;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

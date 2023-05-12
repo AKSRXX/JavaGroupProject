@@ -1,4 +1,4 @@
-package com.example.librarymanager;
+package com.it3330.librarymanager;
 
 import java.util.*;
 import java.text.ParseException;
@@ -120,4 +120,8 @@ public class Librarian extends Employee
 
         //returnsEvent returnMade = new returnsEvent(member, item, returnDate);
     };
+
+    public static void newBorrowsEvent(Object o, Object o1) {
+
+    }
 }

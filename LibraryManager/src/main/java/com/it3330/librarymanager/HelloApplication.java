@@ -1,4 +1,4 @@
-package com.example.librarymanager;
+package com.it3330.librarymanager;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,4 +1,4 @@
-package com.example.librarymanager;
+package com.it3330.librarymanager;
 
 import java.util.ArrayList;
 import java.util.Scanner;

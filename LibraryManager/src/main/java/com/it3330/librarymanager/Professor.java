@@ -1,6 +1,5 @@
-package com.example.librarymanager;
+package com.it3330.librarymanager;
 
-import com.example.librarymanager.Student;
 
 import java.util.*;
 public class Professor extends Member {

@@ -1,8 +1,8 @@
-module com.example.librarymanager {
+module com.it3330.librarymanager {
     requires javafx.controls;
     requires javafx.fxml;
-
-
-    opens com.example.librarymanager to javafx.fxml;
-    exports com.example.librarymanager;
+            
+                            
+    opens com.it3330.librarymanager to javafx.fxml;
+    exports com.it3330.librarymanager;
 }
