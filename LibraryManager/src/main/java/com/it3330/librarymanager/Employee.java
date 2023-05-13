@@ -2,12 +2,14 @@ package com.it3330.librarymanager;
 
 import java.util.*;
 import java.io.*;
-public class Employee extends Person 
+public class Employee extends Person
 {
     // constructor
-    public Employee(String name, String address, Date dob, String email, SSN ssn) 
+    String title;
+    public Employee(String name, String address, Date dob, String email, SSN ssn, String title)
     {
         super(name, address, dob, email, ssn);
+        this.title = title;
     }
 
     public void saveTo ( String textFile) throws Exception{

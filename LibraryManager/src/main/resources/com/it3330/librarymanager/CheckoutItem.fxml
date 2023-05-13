@@ -41,15 +41,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.DatePicker?>
+<VBox fx:controller="com.it3330.librarymanager.BorrowItemController" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <HBox alignment="TOP_CENTER" layoutX="220.0" layoutY="336.0" prefHeight="50.0" prefWidth="200.0" spacing="7.0">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button mnemonicParsing="false" text="Reset" />
-                  <Button mnemonicParsing="false" text="Exit" />
+                  <Button mnemonicParsing="false" text="Save" onAction="#saveButton" />
+                  <Button mnemonicParsing="false" text="Reset" onAction="#clear" />
+                  <Button mnemonicParsing="false" text="Exit" onAction="#handleHome" />
                </children>
                <padding>
                   <Insets top="10.0" />
@@ -60,7 +61,7 @@
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                      <children>
                         <Label prefHeight="18.0" prefWidth="67.0" text="SSN" />
-                        <TextField promptText="Member SSN " />
+                        <TextField fx:id="memberField" promptText="Member SSN" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
@@ -68,11 +69,23 @@
                         <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
                            <children>
                               <Label prefHeight="18.0" prefWidth="67.0" text="ID" />
-                              <TextField promptText="Item ID" />
+                              <TextField fx:id="idField" promptText="Item ID" />
                            </children>
                         </HBox>
                      </children>
                   </HBox>
+                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
+                       <children>
+                           <Label prefHeight="18.0" prefWidth="67.0" text="BorrowDate" />
+                           <DatePicker fx:id = "borrowDate" />
+                       </children>
+                   </HBox>
+                   <HBox alignment="TOP_CENTER" prefHeight="37.0" prefWidth="306.0">
+                       <children>
+                           <Label prefHeight="18.0" prefWidth="67.0" text="Due Date" />
+                           <DatePicker fx:id = "dueDate" />
+                       </children>
+                   </HBox>
                </children>
             </VBox>
             <Label layoutX="241.0" layoutY="27.0" prefHeight="27.0" prefWidth="206.0" text="Checkout Item" textAlignment="CENTER">

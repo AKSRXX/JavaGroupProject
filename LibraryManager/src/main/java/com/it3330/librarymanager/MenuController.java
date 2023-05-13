@@ -58,7 +58,7 @@ public class MenuController {
     @FXML
     void handleNewCollectionClick(ActionEvent event) throws IOException {
 
-        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("AddCollection.fxml"));
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("AddNewCollection.fxml"));
         Scene menuScene = new Scene(menuParent);
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setScene(menuScene);
@@ -118,7 +118,7 @@ public class MenuController {
     @FXML
     void handleEditInformationClick(ActionEvent event) throws IOException {
 
-        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("EditInformations.fxml"));
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("EditMember.fxml"));
         Scene menuScene = new Scene(menuParent);
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.setScene(menuScene);
@@ -126,8 +126,13 @@ public class MenuController {
     }
 
     @FXML
-    void handleRemoveItemClick(ActionEvent event) {
-        System.out.println("TBD");
+    void handleRemoveItemClick(ActionEvent event) throws IOException {
+
+        Parent menuParent = FXMLLoader.load(HelloApplication.class.getResource("RemoveCollection.fxml"));
+        Scene menuScene = new Scene(menuParent);
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.setScene(menuScene);
+        primaryStage.show();
     }
 
     @FXML

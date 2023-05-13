@@ -45,7 +45,7 @@ public class SSN {
         String b = input.substring(3, 5);
         String c = input.substring(5);
         String d = a + "-" + b + "-" + c;
-        if(input.length() != 9 ||  usedSSNs.contains(d) == true)
+        if(input.length() != 9 )
         {
             System.out.println("Invalid Input: Enter New SSN");
             String input2 = scanner.nextLine();

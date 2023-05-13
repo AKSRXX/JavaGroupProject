@@ -22,7 +22,10 @@ public class EmployeeController extends BaseController{
     private DatePicker dateField;
     @FXML
     private TextField titleField;
-
+    @FXML
+    private void clear()throws Exception{
+        super.clearControllerProperties(this);
+    }
     @FXML
     private void getValues() throws Exception {
         String name = nameField.getText();
@@ -39,9 +42,8 @@ public class EmployeeController extends BaseController{
                         .toInstant()                         // Extract an `Instant` object, a moment always in UTC.
         );
         System.out.println(String.format("[New Employee] Name: %s Address: %s Email: %s, SSN: %s, Date: %s, Employee Title: %s", name, address, email, SSN, date, title));
-        Member member = new Member(name, address, date1, email, new SSN(SSN));
-        member.saveTo("db.txt");
-        System.out.println(member.getMemberId());
+        Employee employee = new Employee(name, address, date1, email, new SSN(SSN), title);
+        EventHandlerMain.newEmployeeEvent(employee.getName(), employee.getAddress(), this.formatString(date), employee.getEmail(), employee.getSsn(), employee.title);
     }
     private String formatString(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

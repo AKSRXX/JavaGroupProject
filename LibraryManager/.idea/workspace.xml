@@ -5,84 +5,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e40eb5bf-e5c6-4fcc-8610-c3106f8f9757" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/BaseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/BorrowEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/EmployeeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/EventHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/External.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/HelloApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/HelloController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Librarian.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Member.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/MemberController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/MenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Professor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/ProjectMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/SSN.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Technician.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewCollection.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewEmployee.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewMember.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/CheckoutItem.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/EditInformation.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/MainMenu2.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/OverdueItems.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/RemoveCollection.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/RemoveMember.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/ReturnItem.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/borrows.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/collections.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/employeedatabasefile.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/membershipdatabasefile.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/BorrowItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/EditMemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/EventHandlerMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/NewCollectionControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/OverdueItemsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/RemoveCollection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/RemoveMemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/ReturnItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.txt" beforeDir="false" afterPath="$PROJECT_DIR$/db.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/BaseController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/BorrowEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Employee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/EmployeeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/EventHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/External.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Librarian.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/MemberController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/MenuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Person.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Professor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/ProjectMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/SSN.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Student.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/librarymanager/Technician.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/AddNewCollection.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/AddNewEmployee.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/AddNewMember.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/CheckoutItem.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/EditInformation.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/MainMenu2.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/OverdueItems.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/RemoveCollection.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/RemoveMember.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/ReturnItem.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/db.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/librarymanager/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../borrows.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../membershipdatabasefile.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../returnsEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/EventHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Librarian.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Librarian.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/ProjectMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/SSN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/SSN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Technician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager/Technician.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewCollection.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewCollection.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewEmployee.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewEmployee.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewMember.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/AddNewMember.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/CheckoutItem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/CheckoutItem.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/EditInformation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/EditMember.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/OverdueItems.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/OverdueItems.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/RemoveCollection.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/RemoveCollection.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/RemoveMember.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/RemoveMember.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/ReturnItem.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager/ReturnItem.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="2PhMh9nHmRK5MZIkEfK5zyLzg8X" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -91,13 +67,25 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Jacob/JavaFX"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "Jacob/JavaFX",
+    "last_opened_file_path": "/Users/jacobwoods45/Documents/JavaGroupProject/LibraryManager/src/main/resources/com/it3330/librarymanager"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/com/it3330/librarymanager" />
       <recent name="$PROJECT_DIR$/src/main/java/com/it3330/librarymanager" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.it3330.librarymanager" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.it3330.librarymanager" />
     </key>
   </component>
   <component name="RunManager" selected="Application.HelloApplication">
